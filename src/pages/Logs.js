@@ -5,16 +5,16 @@ import {Container} from 'react-bootstrap'
 import LogDisplay from '../components/LogDisplay'
 
 import proteinDeath from '../logs/proteindeath.txt'
-import dumbovsbutum from '../logs/dumbo/dumbovsbutum.txt'
+import geradonvsbutum from '../logs/geradon/geradonvsbutum.txt'
 
 const Logs = () => {
 	const [proteinTranscripts, setProteinTranscripts] = useState([])
 	const proteinTitles = ['Oh How Little we Knew Thee']
 	const proteinLogs = [proteinDeath]
 
-	const [dumboTranscripts, setDumboTranscripts] = useState([])
-	const dumboTitles = ['Oh How Little we Knew Thee']
-	const dumboLogs = [dumbovsbutum]
+	const [geradonTranscripts, setGeradonTranscripts] = useState([])
+	const geradonTitles = ['Oh How Little we Knew Thee']
+	const geradonLogs = [geradonvsbutum]
 
 	useEffect(() => {
 		const regex1 = new RegExp('color=#D09B61FF', 'gm')
@@ -44,7 +44,7 @@ const Logs = () => {
 		const regex2 = new RegExp('</color>', 'gm')
 		const subst2 = `</span>`
 		let allTranscripts = []
-		dumboLogs.forEach(log => {
+		geradonLogs.forEach(log => {
 			let lines = []
 			fetch(log)
 				.then(r => r.text())
@@ -55,7 +55,7 @@ const Logs = () => {
 					})
 				})
 				.then(() => (allTranscripts = [...allTranscripts, lines.reverse()]))
-				.then(() => setDumboTranscripts(allTranscripts))
+				.then(() => setGeradonTranscripts(allTranscripts))
 		})
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
@@ -73,12 +73,12 @@ const Logs = () => {
 				})}
 			</Container>
 			<Container>
-				<h2>Dumbos's Logs (Jon)</h2>
-				{dumboTranscripts.map((log, index) => {
+				<h2>Géradon's Logs (Agnone)</h2>
+				{geradonTranscripts.map((log, index) => {
 					return (
 						<LogDisplay
 							log={log}
-							title={dumboTitles[index]}
+							title={geradonTitles[index]}
 						/>
 					)
 				})}
